@@ -1,10 +1,12 @@
 import System.Environment (getArgs)
 
+adjacentPairs xs = zip xs (tail xs)
+
 validDifferences :: [Int] -> Bool
-validDifferences xs = all (\(x, y) -> abs (x - y) >= 1 && abs (x - y) <= 3) (zip xs (tail xs))
+validDifferences xs = all (\(x, y) -> abs (x - y) >= 1 && abs (x - y) <= 3) (adjacentPairs xs)
 
 isMonotonic :: [Int] -> Bool
-isMonotonic xs = all (uncurry (<=)) (zip xs (tail xs)) || all (uncurry (>=)) (zip xs (tail xs))
+isMonotonic xs = all (uncurry (<=)) (adjacentPairs xs) || all (uncurry (>=)) (adjacentPairs xs)
 
 isSafe :: [Int] -> Bool
 isSafe xs = validDifferences xs && isMonotonic xs

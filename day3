@@ -1,0 +1,3 @@
+#!/bin/bash
+
+runhaskell src/Day3.hs "$@"
